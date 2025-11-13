@@ -36,7 +36,6 @@ services:
     extra_hosts:
       - docker.sandbox.net:172.18.0.1
     # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
-    #network_mode: service:mysqlserver
     network_mode: "sandbox.net"
     # [Optional] Required for ptrace-based debuggers like C++, Go, and Rust
     cap_add:
@@ -57,6 +56,7 @@ volumes:
   #  
   sandbox_mysql_data:
     external: true
+
 #
 # Docker Networks
 #
