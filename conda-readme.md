@@ -30,7 +30,7 @@ export PYSPARK_DRIVER_PYTHON=/opt/conda/envs/env_python3_11_13/bin/python
 #### Create Conda Virtual Env : Python 3.11.13
 ```bash
 
-conda env create -f bd-pyspark-module/env_python3_11_13.yaml
+conda env create -f bd-pyspark-module/environment.yml
 sudo -E /opt/conda/bin/conda create -y -n env_python3_11_13 -c conda-forge python=3.11.13 pyarrow pandas conda-pack
 sudo -E /opt/conda/bin/conda update -n base -c defaults conda
 conda activate env_python3_11_13
@@ -94,9 +94,9 @@ conda activate env_python3_11_13
 #
 # Update Virtual Env
 #
-conda env update --file bd-pyspark-module/env_python3_11_13.yaml --prune
-conda env update --name env_python3_11_13 --file bd-pyspark-module/env_python3_11_13.yaml --prune
-conda env update --name base --file bd-pyspark-module/env_python3_11_13.yaml --prune
+conda env update --file bd-pyspark-module/environment.yml --prune
+conda env update --name env_python3_11_13 --file bd-pyspark-module/environment.yml --prune
+conda env update --name base --file bd-pyspark-module/environment.yml --prune
 #
 #### Export Virtual Env
 ```bash
