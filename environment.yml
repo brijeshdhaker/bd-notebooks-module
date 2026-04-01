@@ -47,3 +47,5 @@ dependencies:
       - confluent-kafka[avro]==2.10.1
       - avro==1.12.0
       - setuptools
+      - openai
+      - openai-agents
