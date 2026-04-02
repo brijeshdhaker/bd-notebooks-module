@@ -29,3 +29,4 @@ target
 !/.idea
 *.pyc
 .ipynb_checkpoints
+.env
