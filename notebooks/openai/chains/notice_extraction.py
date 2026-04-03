@@ -77,7 +77,7 @@ class NoticeEmailExtract(BaseModel):
     def compliance_deadline(self) -> date | None:
         return self._convert_string_to_date(self.compliance_deadline_str)
     
-    # ...
+# ...
 
 info_parse_prompt = ChatPromptTemplate.from_messages(
     [

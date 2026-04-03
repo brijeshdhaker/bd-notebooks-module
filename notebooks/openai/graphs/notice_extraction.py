@@ -55,7 +55,6 @@ def check_escalation_status_node(state: GraphState) -> GraphState:
 def answer_follow_up_question_node(state: GraphState) -> GraphState:
     """
     Answer follow-up questions about the notice using BINARY_QUESTION_CHAIN
-
     """
     if state["current_follow_up"]:
         question = state["current_follow_up"] + " " + state["notice_message"]
@@ -68,14 +67,18 @@ def answer_follow_up_question_node(state: GraphState) -> GraphState:
 
 
 def route_follow_up_edge(state: GraphState) -> str:
-    """Determine whether a follow-up question is required"""
+    """
+    Determine whether a follow-up question is required
+    """
     if state.get("current_follow_up"):
         return "answer_follow_up_question"
     return END
 
 
 def send_escalation_email_node(state: GraphState) -> GraphState:
-    """Send an escalation email"""
+    """
+    Send an escalation email
+    """
     send_escalation_email(
         notice_email_extract=state["notice_email_extract"],
         escalation_emails=state["escalation_emails"],
@@ -92,8 +95,9 @@ def create_legal_ticket_node(state: GraphState) -> GraphState:
     return state
 
 def route_escalation_status_edge(state: GraphState) -> str:
-    """Determine whether to send an escalation email or
-    create a legal ticket"""
+    """
+    Determine whether to send an escalation email or create a legal ticket
+    """
     if state["requires_escalation"]:
         LOGGER.info("Escalation needed!")
         return "send_escalation_email"
