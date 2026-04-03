@@ -25,7 +25,8 @@ $ docker run -it --rm jupyter/all-spark-notebook:latest pyspark --version
 ```
 
 ```bash
-
+git reset --soft HEAD~2 # Changes stay in staging
+git reset HEAD~2        # Changes become unstaged
 
 ```
 
