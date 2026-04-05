@@ -4,6 +4,12 @@
     "python-envs.pythonProjects": [],
     "python.envFile": "${workspaceFolder}/.env",
     "python.terminal.useEnvFile": true,
-    "postman.settings.dotenv-detection-notification-visibility": false
+    "postman.settings.dotenv-detection-notification-visibility": false,
+    "chat.mcp.discovery.enabled": {
+        "claude-desktop": true,
+        "windsurf": true,
+        "cursor-global": true,
+        "cursor-workspace": true
+    }
 
 }
