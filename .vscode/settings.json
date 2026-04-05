@@ -1,0 +1,9 @@
+{
+    "python-envs.defaultEnvManager": "ms-python.python:conda",
+    "python-envs.defaultPackageManager": "ms-python.python:conda",
+    "python-envs.pythonProjects": [],
+    "python.envFile": "${workspaceFolder}/.env",
+    "python.terminal.useEnvFile": true,
+    "postman.settings.dotenv-detection-notification-visibility": false
+
+}
