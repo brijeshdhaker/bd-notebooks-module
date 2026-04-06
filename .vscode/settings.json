@@ -4,6 +4,7 @@
     "python-envs.pythonProjects": [],
     "python.envFile": "${workspaceFolder}/.env",
     "python.terminal.useEnvFile": true,
+    "python.terminal.activateEnvironment": true,
     "postman.settings.dotenv-detection-notification-visibility": false,
     "chat.mcp.discovery.enabled": {
         "claude-desktop": true,

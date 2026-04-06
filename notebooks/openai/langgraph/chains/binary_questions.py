@@ -22,7 +22,11 @@ binary_question_prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
-binary_question_model = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+binary_question_model = ChatOpenAI(
+    model="openai/gpt-oss-20b",
+    base_url="https://api.groq.com/openai/v1",
+    temperature=0
+)
 
 BINARY_QUESTION_CHAIN = (
     binary_question_prompt

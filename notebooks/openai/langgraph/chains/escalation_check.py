@@ -25,7 +25,12 @@ escalation_prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
-escalation_check_model = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+# model="gpt-4o-mini", 
+escalation_check_model = ChatOpenAI(
+    model="openai/gpt-oss-20b",
+    base_url="https://api.groq.com/openai/v1",
+    temperature=0
+)
 
 ESCALATION_CHECK_CHAIN = (
     escalation_prompt

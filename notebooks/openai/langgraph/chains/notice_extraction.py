@@ -100,7 +100,11 @@ info_parse_prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
-notice_parser_model = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+notice_parser_model = ChatOpenAI(
+    model="openai/gpt-oss-20b",
+    base_url="https://api.groq.com/openai/v1",
+    temperature=0
+)
 
 NOTICE_PARSER_CHAIN = (
     info_parse_prompt

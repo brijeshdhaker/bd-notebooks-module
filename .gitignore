@@ -30,3 +30,5 @@ target
 *.pyc
 .ipynb_checkpoints
 .env
+credentials.json
+token.json

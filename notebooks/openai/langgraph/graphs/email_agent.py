@@ -103,9 +103,11 @@ tools = [
     extract_notice_data,
 ]
 tool_node = ToolNode(tools)
-EMAIL_AGENT_MODEL = ChatOpenAI(model="gpt-4o-mini", temperature=0).bind_tools(
-    tools
-)
+EMAIL_AGENT_MODEL = ChatOpenAI(
+    model="openai/gpt-oss-20b",
+    base_url="https://api.groq.com/openai/v1",
+    temperature=0
+).bind_tools(tools)
 
 def call_agent_model_node(state: MessagesState) -> dict[str, list[AIMessage]]:
     """Node to call the email agent model"""
