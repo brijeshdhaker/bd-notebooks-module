@@ -1,23 +1,17 @@
 import random
 import time
 from pydantic import EmailStr
-from chains.notice_extraction import NoticeEmailExtract
-from notebooks.openai.utils.logging_config import LOGGER
+from com.example.rag.chains.notice_extraction import NoticeEmailExtract
+from com.example.utils.logging_config import LOGGER
 
-def send_escalation_email(
-    notice_email_extract: NoticeEmailExtract,
-    escalation_emails: list[EmailStr]
-) -> None:
+def send_escalation_email(notice_email_extract: NoticeEmailExtract, escalation_emails: list[EmailStr]) -> None:
     """Simulate sending escalation emails"""
     LOGGER.info("Sending escalation emails...")
     for email in escalation_emails:
         time.sleep(1)
         LOGGER.info(f"Escalation email sent to {email}")
 
-def create_legal_ticket(
-    current_follow_ups: dict[str, bool] | None,
-    notice_email_extract: NoticeEmailExtract,
-) -> str | None:
+def create_legal_ticket(current_follow_ups: dict[str, bool] | None, notice_email_extract: NoticeEmailExtract,) -> str | None:
     """Simulate creating a legal ticket using your company's API."""
     LOGGER.info("Creating legal ticket for notice...")
     time.sleep(2)
