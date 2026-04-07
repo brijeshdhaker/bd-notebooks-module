@@ -98,6 +98,27 @@ hello.greet("Pythonista")
 import sys
 sys.path.insert(0, "~/IdeaProjects/bd-pyspark-module/src/main/py")
 ```
+
+## Spark CSV Reader
+
+A simple Spark program to read data from a CSV file.
+
+### Usage
+
+1. Ensure PySpark is installed: `pip install pyspark`
+2. Run the program: `python spark_csv_reader.py`
+
+The program will:
+- Read the CSV file from `data/customers_20240101070707.csv`
+- Display the schema
+- Show the first 10 rows
+- Print total row and column counts
+
+### Requirements
+
+- Apache Spark
+- PySpark library
+- CSV file in the `data/` directory
 # or
 ```bash
 
