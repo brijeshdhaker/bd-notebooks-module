@@ -5,7 +5,7 @@ on database directory /apps/sandbox/metastore with class loader jdk.internal.loa
 Loaded from file:/opt/conda/lib/python3.11/site-packages/pyspark/jars/derby-10.14.2.0.jar
 java.vendor=Ubuntu
 java.runtime.version=17.0.18+8-Ubuntu-124.04.1
-user.dir=/home/brijeshdhaker/ideaProjects/bd-notebooks-module/notebooks/deltalake
+user.dir=/home/brijeshdhaker/IdeaProjects/bd-notebooks-module/notebooks/deltalake
 os.name=Linux
 os.arch=amd64
 os.version=6.17.0-20-generic

@@ -8,14 +8,14 @@ conda install jupyter -c defaults
 ### jupyter lab
 ```bash
 
-$ jupyter lab --port=8888 --ip=0.0.0.0 --no-browser --allow-root --NotebookApp.token='' --notebook-dir=~/ideaProjects/bd-notebooks-module/notebooks
+$ jupyter lab --port=8888 --ip=0.0.0.0 --no-browser --allow-root --NotebookApp.token='' --notebook-dir=~/IdeaProjects/bd-notebooks-module/notebooks
 ```
 
 ### jupyter notebook
 #
 ```bash
 
-$ jupyter notebook --port=8888 --ip=0.0.0.0 --no-browser --allow-root --NotebookApp.token='' --notebook-dir=${HOME}/ideaProjects/bd-notebooks-module/notebooks
+$ jupyter notebook --port=8888 --ip=0.0.0.0 --no-browser --allow-root --NotebookApp.token='' --notebook-dir=${HOME}/IdeaProjects/bd-notebooks-module/notebooks
 ```
 
 
