@@ -1,5 +1,5 @@
 Flask
-pyspark
+pyspark==3.5.3
 mysql-connector-python==9.4.0
 delta-spark==3.3.2
 confluent-kafka[avro]==2.10.1
@@ -14,13 +14,13 @@ langchain_core
 langchain_community
 langchain-mcp-adapters
 langchain-chroma 
-chromadb
 langchain_openai
 langchain_groq
 langchain-huggingface
 langchain-google-genai
 langchain-azure-ai[tools,opentelemetry] 
 azure-identity
+chromadb
 text-generation 
 transformers 
 google-search-results 
@@ -31,3 +31,8 @@ sentencepiece
 jinja2 
 bitsandbytes 
 accelerate
+pypdf
+pymupdf
+faiss-cpu
+python-dotenv
+typesense

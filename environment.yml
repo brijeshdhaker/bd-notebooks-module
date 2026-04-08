@@ -56,13 +56,13 @@ dependencies:
       - langchain_community
       - langchain-mcp-adapters
       - langchain-chroma 
-      - chromadb
       - langchain_openai
       - langchain_groq
       - langchain-huggingface
       - langchain-google-genai
       - langchain-azure-ai[tools,opentelemetry] 
       - azure-identity
+      - chromadb
       - text-generation 
       - transformers 
       - google-search-results 

@@ -6,17 +6,26 @@ from langchain.agents import create_agent
 from dotenv import load_dotenv
 
 import asyncio
-
-async def main():
-    #
-    client = MultiServerMCPClient({
+"""
         "math":{
             "command":"python",
             "args":["src/main/py/com/example/rag/mcp/mathserver.py"],           # Put absolute path here
-            "transport":"stdio"
+            "transport":"stdio",
+            "env":{
+                "EMAIL_USER": "",
+                "PYTHONPATH": "/home/brijeshdhaker/IdeaProjects/bd-notebooks-module/src/main/py"
+            }
         },
         
         "weather":{
+            "url":"http://127.0.0.1:8000/mcp",  # Ensure Server is Running Here
+            "transport":"streamable_http"
+        },
+"""
+async def main():
+    #
+    client = MultiServerMCPClient({
+        "email":{
             "url":"http://127.0.0.1:8000/mcp",  # Ensure Server is Running Here
             "transport":"streamable_http"
         },
@@ -41,7 +50,7 @@ async def main():
     agent = create_agent(model, tools)
 
     
-    
+    """
     #
     math_response = await agent.ainvoke({
         "messages":[{
@@ -59,7 +68,15 @@ async def main():
     })
 
     print("weather_response : " + weather_response["messages"][-1].content)
+    """
 
+    email_response = await agent.ainvoke({
+        "messages":[{
+            "role":"user", "content": "send email 'email': { 'recipient':'brijeshdhaker@gmail.com', 'subject':'Attachment Test', 'body':'See attached'}"
+        }]
+    })
+
+    print("email_response : " + email_response["messages"][-1].content)
 
 # To call async method 
 asyncio.run(main())

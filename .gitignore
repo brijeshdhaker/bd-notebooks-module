@@ -34,3 +34,4 @@ target
 .env
 credentials.json
 token.json
+vactor_store

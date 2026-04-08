@@ -13,8 +13,9 @@ set -x
 
 python -m venv v_env
 source v_env/bin/activate
+pip cache purge
 pip install -U pip
-pip install -r requirements.pip
+pip install -r requirements.txt
 deactivate
 
 # Here we package up an isolated environment that we'll ship to YARN.
