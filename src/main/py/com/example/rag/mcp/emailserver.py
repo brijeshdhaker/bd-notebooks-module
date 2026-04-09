@@ -8,7 +8,7 @@ from email.message import EmailMessage
 from com.example.utils.GmailProcessor import GmailProcessor
 
 # 1. Initialize FastMCP server
-mcp = FastMCP("Email Notification MCP Server")
+mcp = FastMCP("Email Notification MCP Server", port=8000)
 
 # 2. Define Complex Data Type for Email
 class EmailPayload(BaseModel):
@@ -17,13 +17,7 @@ class EmailPayload(BaseModel):
     body: str
     cc: Optional[List[EmailStr]] = Field(default=None, description="Optional CC list")
     attachment_names: Optional[List[str]] = Field(default=None, description="List of attachment filenames")
-
-
-# 1. Define a complex data structure
-class UserProfile(BaseModel):
-    user_id: int
-    tags: list[str] = Field(description="A list of interests")
-    metadata: dict[str, str] = Field(description="Key-value pairs for settings")
+    params: Optional[dict[str, str]] = Field(description="Key-value pairs for templates")
 
 GmailProcessor()
 
@@ -32,16 +26,38 @@ GmailProcessor()
 def send_email(email: EmailPayload) -> str:
     """_summary_
     Sends a complex, structured email with CC and attachment metadata.
+    Args:
+        template: str
+        params: dict
+    Returns: 
+        count of updated records
+    Example:
+        send an email notification with folloing details: 
+        --recipient 'brijeshdhaker@gmail.com'
+        --subject 'AI Notification Test #2025-01-01{id}'
+        --body 'Hello {name},\n\n This is automated AI message send using AI Tools #Message-{id}'
+        --params {"id":"2001", "name":"Brijesh"}
     """
     msg = EmailMessage()
     msg['From'] = "brijeshdhaker@gmail.com"
     msg['To'] = email.recipient
-    msg['Subject'] = email.subject
-    msg.set_content(email.body)
-
+    
+    #
     if email.cc:
         msg['Cc'] = ", ".join(email.cc)
-        
+    
+    #
+    _body = None
+    if email.body and email.params:
+        #_sql = request.template.format(**request.params)
+        _body = email.body.format_map(email.params)
+        msg['Subject'] = email.subject.format_map(email.params)
+    else:
+        _body = email.body
+        msg['Subject'] = email.subject
+    msg.set_content(_body)
+    
+
     # Simulated Attachment Handling
     if email.attachment_names:
         return f"Drafted email to {email.recipient} with {len(email.attachment_names)} attachments: {email.attachment_names}"
@@ -51,4 +67,4 @@ def send_email(email: EmailPayload) -> str:
 
 #
 if __name__ == "__main__":
-    mcp.run(transport="stdio")
+    mcp.run(transport="streamable-http")

@@ -1,3 +1,4 @@
+import itertools
 import mysql.connector
 
 
@@ -48,25 +49,32 @@ class MysqlProcessor(object):
 
     #
     #@staticmethod
-    def fetch(self, sql:str = None):
-        cursor = MysqlProcessor.connection.cursor(dictionary=True)
+    def fetchOne(self, sql:str = None, isdict= False):
+        if isdict :
+            cursor = MysqlProcessor.connection.cursor(dictionary=True)
+        else:
+            cursor = MysqlProcessor.connection.cursor()
         cursor.execute(sql)
-        result = cursor.fetchone()
-        return result
+        #cursor.fetchone()
+        return cursor.fetchall()[0]
     
     #
-    def fetchAll(self, sql = None):
-        cursor = self.connection.cursor()
+    def fetchAll(self, sql = None, isdict= False):
+        if isdict :
+            cursor = MysqlProcessor.connection.cursor(dictionary=True)
+        else:
+            cursor = MysqlProcessor.connection.cursor()
+        
         cursor.execute(sql)
-        results = cursor.fetchall()
-        return results
+        return cursor.fetchall()
 
     #
     def execute(self, sql = None):
         cursor = self.connection.cursor()
         cursor.execute(sql)
+        _cnt = cursor.rowcount
         self.commit()
-        return cursor.rowcount
+        return _cnt
 
     #
     def commit(self):
@@ -77,3 +85,13 @@ class MysqlProcessor(object):
     def close(self):
         # Disconnecting from the server
         self.connection.close()
+
+    #
+    def __convertAsDict(self, cursor):
+        #
+        _col_desc = cursor.description
+        #
+        column_names = [col[0] for col in _col_desc]
+        results = [dict(zip(column_names, row)) for row in cursor.fetchall()]
+        return results
+    

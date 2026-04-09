@@ -1,36 +1,52 @@
 #
 # python src/main/py/com/example/rag/mcp/mcp-client.py
 #
+
+import asyncio
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain.agents import create_agent
 from dotenv import load_dotenv
 
-import asyncio
 """
-        "math":{
+
+"""
+async def main():
+    #
+    client = MultiServerMCPClient({
+                
+        "weather-mcp-client":{
+            "url":"http://127.0.0.1:8011/mcp",                                  # Ensure Server is Running Here
+            "transport":"streamable_http"
+        },
+
+        "email-mcp-client":{
+            "url":"http://127.0.0.1:8000/mcp",  # Ensure Server is Running Here
+            "transport":"streamable_http"
+        },
+        
+        "mysql-mcp-client":{
+            "command":"python",
+            "args":["src/main/py/com/example/rag/mcp/mysqlserver.py"],           # Put absolute path here
+            "transport":"stdio",
+            "env":{
+                "WORK_DIR":"/home/brijeshdhaker/IdeaProjects/bd-notebooks-module",
+                "PYTHONPATH": "/home/brijeshdhaker/IdeaProjects/bd-notebooks-module/src/main/py"
+            },
+            "cwd":"/home/brijeshdhaker/IdeaProjects/bd-notebooks-module"
+        },
+
+        "math-mcp-client":{
             "command":"python",
             "args":["src/main/py/com/example/rag/mcp/mathserver.py"],           # Put absolute path here
             "transport":"stdio",
             "env":{
                 "EMAIL_USER": "",
                 "PYTHONPATH": "/home/brijeshdhaker/IdeaProjects/bd-notebooks-module/src/main/py"
-            }
-        },
-        
-        "weather":{
-            "url":"http://127.0.0.1:8000/mcp",  # Ensure Server is Running Here
-            "transport":"streamable_http"
-        },
-"""
-async def main():
-    #
-    client = MultiServerMCPClient({
-        "email":{
-            "url":"http://127.0.0.1:8000/mcp",  # Ensure Server is Running Here
-            "transport":"streamable_http"
+            },
+            "cwd":"/home/brijeshdhaker/IdeaProjects/bd-notebooks-module"
         },
     })
-    
+
     #
     import os
     import getpass
@@ -41,42 +57,35 @@ async def main():
         os.environ["OPENAI_API_KEY"] = getpass.getpass("Enter your OpenAI API key: ")
 
     #
-    tools = await client.get_tools()
-    
+    _tools = await client.get_tools()
+
     #
     model=init_chat_model(model="groq:openai/gpt-oss-20b")
+
+    #
+    agent = create_agent(model, _tools)
     
     #
-    agent = create_agent(model, tools)
+    _messages = [
+        "What is (3 + 5)*12 ?",
+        "What is weather in 'Mumbia' ?",
+        """
+        send an email with folloing details: 
+        --recipient 'brijeshdhaker@gmail.com'
+        --subject 'AI Notification Test'
+        --body 'This is automated AI message send using AI Tools.'
+        """,
+        "Hello, Good Morning !!"
+    ]
 
-    
-    """
-    #
-    math_response = await agent.ainvoke({
-        "messages":[{
-            "role":"user", "content": "What is (3 + 5)*12 ?"
-        }]
-    })
-
-    print("math_response : " + math_response["messages"][-1].content)
-
-
-    weather_response = await agent.ainvoke({
-        "messages":[{
-            "role":"user", "content": "What is weather in 'Mumbia' ?"
-        }]
-    })
-
-    print("weather_response : " + weather_response["messages"][-1].content)
-    """
-
-    email_response = await agent.ainvoke({
-        "messages":[{
-            "role":"user", "content": "send email 'email': { 'recipient':'brijeshdhaker@gmail.com', 'subject':'Attachment Test', 'body':'See attached'}"
-        }]
-    })
-
-    print("email_response : " + email_response["messages"][-1].content)
+    for _m in _messages:
+        _response = await agent.ainvoke({"messages":[{ "role":"user", "content":_m }]})
+        print("email_response : " + _response["messages"][-1].content)
 
 # To call async method 
 asyncio.run(main())
+
+    
+
+
+

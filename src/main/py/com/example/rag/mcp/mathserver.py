@@ -4,7 +4,7 @@
 from mcp.server.fastmcp import FastMCP
 
 #mcp server name
-mcp = FastMCP("Math MCP Server")
+mcp = FastMCP("SANDBOX MCP Server",port=8000)
 
 @mcp.tool()
 def greet(name: str) -> str:

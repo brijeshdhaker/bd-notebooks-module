@@ -4,7 +4,7 @@
 from mcp.server.fastmcp import FastMCP
 
 #mcp server name
-mcp = FastMCP("MCP Server")
+mcp = FastMCP("Weather MCP Server", port=8011)
 
 @mcp.tool()
 def getWeather(location: str) -> str:
