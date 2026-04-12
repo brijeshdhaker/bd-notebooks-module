@@ -1,5 +1,5 @@
 #
-# python src/main/py/com/example/rag/mcp/mathserver.py
+# python src/main/py/com/example/agentic/mcp/mathserver.py
 #
 from mcp.server.fastmcp import FastMCP
 

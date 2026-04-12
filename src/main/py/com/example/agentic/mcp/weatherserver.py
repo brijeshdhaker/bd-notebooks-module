@@ -1,5 +1,5 @@
 #
-# python src/main/py/com/example/rag/mcp/weatherserver.py
+# python src/main/py/com/example/agentic/mcp/weatherserver.py
 #
 from mcp.server.fastmcp import FastMCP
 

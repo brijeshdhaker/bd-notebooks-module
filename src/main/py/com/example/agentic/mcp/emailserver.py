@@ -1,5 +1,5 @@
 #
-# python src/main/py/com/example/rag/mcp/emailserver.py
+# python src/main/py/com/example/agentic/mcp/emailserver.py
 #
 from mcp.server.fastmcp import FastMCP
 from pydantic import BaseModel, EmailStr, Field

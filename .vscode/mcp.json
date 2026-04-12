@@ -25,7 +25,7 @@
 			"type": "stdio",
             "command": "python",
             "args": [
-                "/home/brijeshdhaker/IdeaProjects/bd-notebooks-module/src/main/py/com/example/rag/mcp/mysqlserver.py"
+                "/home/brijeshdhaker/IdeaProjects/bd-notebooks-module/src/main/py/com/example/agentic/mcp/mysqlserver.py"
             ],
 			"env": {
 				"WORK_DIR":"/home/brijeshdhaker/IdeaProjects/bd-notebooks-module",

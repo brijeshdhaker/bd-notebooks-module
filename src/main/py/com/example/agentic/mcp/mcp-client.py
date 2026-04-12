@@ -1,5 +1,5 @@
 #
-# python src/main/py/com/example/rag/mcp/mcp-client.py
+# python src/main/py/com/example/agentic/mcp/mcp-client.py
 #
 
 import asyncio
@@ -26,7 +26,7 @@ async def main():
         
         "mysql-mcp-client":{
             "command":"python",
-            "args":["src/main/py/com/example/rag/mcp/mysqlserver.py"],           # Put absolute path here
+            "args":["src/main/py/com/example/agentic/mcp/mysqlserver.py"],           # Put absolute path here
             "transport":"stdio",
             "env":{
                 "WORK_DIR":"/home/brijeshdhaker/IdeaProjects/bd-notebooks-module",
@@ -37,7 +37,7 @@ async def main():
 
         "math-mcp-client":{
             "command":"python",
-            "args":["src/main/py/com/example/rag/mcp/mathserver.py"],           # Put absolute path here
+            "args":["src/main/py/com/example/agentic/mcp/mathserver.py"],           # Put absolute path here
             "transport":"stdio",
             "env":{
                 "EMAIL_USER": "",

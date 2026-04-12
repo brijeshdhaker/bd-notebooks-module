@@ -1,5 +1,5 @@
 #
-# python src/main/py/com/example/rag/mcp/mysqlserver.py
+# python src/main/py/com/example/agentic/mcp/mysqlserver.py
 #
 from mcp.server.fastmcp import FastMCP
 from pydantic import BaseModel, Field
