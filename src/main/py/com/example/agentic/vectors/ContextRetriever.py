@@ -1,6 +1,6 @@
-from com.example.rag.loader.LoadManager import LoadManager
-from com.example.rag.embedding.EmbeddingManager import EmbeddingManager
-from com.example.rag.vectors.VectorStoreManager import VectorStoreManager
+from com.example.agentic.loader.LoadManager import LoadManager
+from com.example.agentic.embedding.EmbeddingManager import EmbeddingManager
+from com.example.agentic.vectors.VectorStoreManager import VectorStoreManager
 from typing import List, Dict, Any, Tuple
 
 
@@ -33,7 +33,7 @@ class ContextRetriever:
         print(f"Top K: {top_k}, Score threshold: {score_threshold}")
         
         # Generate query embedding
-        query_embedding = self.embedding_manager.generate_text_embeddings([query])[0]
+        query_embedding = self.embedding_manager.embed_query([query])[0]
         
         # Search in vector store
         try:
@@ -86,6 +86,8 @@ if __name__ == "__main__":
     
     #
     ctx_retriever= ContextRetriever(vectorstore,embedding_manager)
-    ctx_retriever.retrieve("Tell me about Dharmendra ?")
+    documents = ctx_retriever.retrieve("Tell me about Dharmendra ?")
+    for d in documents :
+        print(d['content'])
 
 

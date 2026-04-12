@@ -7,6 +7,9 @@ avro==1.12.0
 setuptools
 openai
 openai-agents
+crewai
+crewai[tools] 
+crewai_tools
 langsmith
 langgraph
 langchain
@@ -18,7 +21,8 @@ langchain_openai
 langchain_groq
 langchain-huggingface
 langchain-google-genai
-langchain-azure-ai[tools,opentelemetry] 
+langchain_ollama
+langchain-azure-ai[tools,opentelemetry]
 azure-identity
 chromadb
 text-generation 
@@ -36,3 +40,6 @@ pymupdf
 faiss-cpu
 python-dotenv
 typesense
+streamlit
+duckduckgo-search
+pysqlite3-binary

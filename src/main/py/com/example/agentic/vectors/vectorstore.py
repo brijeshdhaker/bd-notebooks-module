@@ -5,7 +5,7 @@ import numpy as np
 import pickle
 from typing import List, Any
 from sentence_transformers import SentenceTransformer
-from com.example.rag.embedding.embedding import EmbeddingPipeline
+from com.example.agentic.embedding.embedding import EmbeddingPipeline
 
 class FaissVectorStore:
     def __init__(self, 
@@ -76,7 +76,7 @@ class FaissVectorStore:
 # Example usage
 if __name__ == "__main__":
     
-    from com.example.rag.loader.data_loader import load_all_documents
+    from com.example.agentic.loader.data_loader import load_all_documents
     
     #
     data_dir = "docs"

@@ -7,8 +7,8 @@ from chromadb.config import Settings
 import uuid
 from typing import List, Dict, Any, Tuple
 from sklearn.metrics.pairwise import cosine_similarity
-from com.example.rag.loader.LoadManager import LoadManager
-from com.example.rag.embedding.EmbeddingManager import EmbeddingManager
+from com.example.agentic.loader.LoadManager import LoadManager
+from com.example.agentic.embedding.EmbeddingManager import EmbeddingManager
 
 class VectorStoreManager:
     """Manages document embeddings in a ChromaDB vector store"""
@@ -117,7 +117,7 @@ if __name__ == "__main__":
     douments = load_manager.from_directory()
     print(f"[*INFO] Total loaded documents: {len(douments)}")
     
-    from com.example.rag.splitter.SplitManager import SplitManager
+    from com.example.agentic.splitter.SplitManager import SplitManager
 
     splitManager = SplitManager()
     chunks = splitManager.split_documents(douments)

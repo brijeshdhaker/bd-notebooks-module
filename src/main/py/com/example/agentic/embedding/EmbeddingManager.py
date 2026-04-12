@@ -8,7 +8,7 @@ from chromadb.config import Settings
 import uuid
 from typing import List, Dict, Any, Tuple
 from sklearn.metrics.pairwise import cosine_similarity
-from com.example.rag.loader.LoadManager import LoadManager
+from com.example.agentic.loader.LoadManager import LoadManager
 
 #
 # model_name="sentence-transformers/all-mpnet-base-v2"
@@ -43,7 +43,7 @@ class EmbeddingManager:
             print(f"Error loading model {self.model_name}: {e}")
             raise
 
-    def generate_text_embeddings(self, texts: List[str]) -> np.ndarray:
+    def embed_query(self, texts: List[str]) -> np.ndarray:
         """
         Generate embeddings for a list of texts
         Args:
@@ -59,7 +59,7 @@ class EmbeddingManager:
         print(f"Generated embeddings with shape: {embeddings.shape}")
         return embeddings
     
-    def generate_doc_embeddings(self, documents: List[str]) -> np.ndarray:
+    def embed_documents(self, documents: List[str]) -> np.ndarray:
         """
         Generate embeddings for a list of texts
         Args:
@@ -67,38 +67,15 @@ class EmbeddingManager:
         Returns:
             numpy array of embeddings with shape (len(texts), embedding_dim)
         """
-        _chunks = self.chunk_documents(documents)
-        print(f"Generating embeddings for {len(_chunks)} texts...")
-        embeddings = self.__embed_chunks(_chunks)
-        return embeddings
-    
-    def __embed_chunks(self, chunks: List[Any]) -> np.ndarray:
+        print(f"Generating embeddings for {len(documents)} documents...")
         if not self.model:
             raise ValueError("Model not loaded")
-        
-        _texts = [chunk.page_content for chunk in chunks]
-        print(f"[INFO] Generating embeddings for {len(_texts)} chunks...")
+        _texts = [doc.page_content for doc in documents]
+        print(f"[INFO] Generating embeddings for {len(_texts)} _texts...")
         embeddings = self.model.encode(_texts, show_progress_bar=True)
-        #huggingFaceEmbeddings = HuggingFaceEmbeddings(model_name=self.model_name)
-        #embeddings = huggingFaceEmbeddings.embed_documents(_texts)
         print(f"[INFO] Generated Embeddings shape: {embeddings.shape}")
         return embeddings
-    
-    def chunk_documents(self, documents: List[Any]) -> List[Any]:
-        splitter = RecursiveCharacterTextSplitter(
-            chunk_size=self.chunk_size,
-            chunk_overlap=self.chunk_overlap,
-            length_function=len,
-            separators=["\n\n", "\n", " ", ""]
-        )
-        chunks = splitter.split_documents(documents)
-        print(f"[INFO] Split {len(documents)} documents into {len(chunks)} chunks.")
-        # Show example of a chunk
-        if chunks:
-            print(f"\Sample chunk:")
-            print(f"Content: {chunks[0].page_content[:200]}...")
-            print(f"Metadata: {chunks[0].metadata}")
-        return chunks
+
 
 
 # Example usage
@@ -110,7 +87,7 @@ if __name__ == "__main__":
     print(f"[*INFO] Total loaded documents: {len(douments)}")
     
     embedding_manager=EmbeddingManager()
-    embeddings = embedding_manager.generate_embeddings(douments)
+    embeddings = embedding_manager.embed_documents(douments)
     
     #chunks = emb_pipe.chunk_documents(docs)
     #embeddings = emb_pipe.embed_chunks(chunks)
