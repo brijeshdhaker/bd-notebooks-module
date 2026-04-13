@@ -46,3 +46,4 @@ typesense
 streamlit
 duckduckgo-search
 unstructured
+ddgs
