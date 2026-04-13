@@ -13,6 +13,7 @@ from com.example.agentic.loader.LoadManager import LoadManager
 #
 # model_name="sentence-transformers/all-mpnet-base-v2"
 # model_name="sentence-transformers/all-MiniLM-L6-v2"
+# model_name="google/embeddinggemma-300m"
 #
 class EmbeddingManager:
     """Handles document embedding generation using SentenceTransformer"""

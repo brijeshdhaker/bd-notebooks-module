@@ -131,3 +131,5 @@ conda install anaconda-clean
 
 #### Remove all Anaconda-related files and directories with a confirmation prompt before deleting each one:
 anaconda-clean --yes
+
+conda uninstall -n base --all
