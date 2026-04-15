@@ -6,6 +6,8 @@
     "python.autoComplete.extraPaths": [
         "${workspaceFolder}/src/main/py"
     ],
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true,
     "python.analysis.extraPaths": [
         "${workspaceFolder}/src/main/py"
     ],

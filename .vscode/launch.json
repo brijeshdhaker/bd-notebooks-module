@@ -13,7 +13,8 @@
       "args": ["run", "--no-debugger", "--no-reload","--host=0.0.0.0", "--port=5000"],
       "jinja": true,
       "autoStartBrowser": false,
-      "envFile": "${workspaceFolder}/.env"
+      "envFile": "${workspaceFolder}/.env",
+      "justMyCode": false
     },
     {
       "name": "Python Debugger: Current File",
@@ -21,7 +22,8 @@
       "request": "launch",
       "program": "${file}",
       "console": "integratedTerminal",
-      "envFile": "${workspaceFolder}/.env"
+      "envFile": "${workspaceFolder}/.env",
+      "justMyCode": false
     },
     {
       "name": "Python Debugger: Current File with Arguments",
@@ -30,7 +32,8 @@
       "program": "${file}",
       "console": "integratedTerminal",
       "args": "${command:pickArgs}",
-      "envFile": "${workspaceFolder}/.env"
+      "envFile": "${workspaceFolder}/.env",
+      "justMyCode": false
     },
     {
       "name": "Test & Debug : bd-notebooks-module",
@@ -42,7 +45,8 @@
       "program": "${file}",
       "console": "integratedTerminal",
       "cwd": "${workspaceFolder}/src/test/py",
-      "envFile": "${workspaceFolder}/.env"
+      "envFile": "${workspaceFolder}/.env",
+      "justMyCode": false
     }
   ]
 }

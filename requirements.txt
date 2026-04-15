@@ -12,9 +12,10 @@ pymysql
 jupysql
 duckdb-engine
 grpcio
+mcp
 crewai
-crewai[tools, litellm] 
-#crewai_tools
+crewai[tools, litellm, openai] 
+crewai-tools[mcp]
 langsmith
 langgraph
 langchain
@@ -28,7 +29,7 @@ langchain_groq
 langchain-huggingface
 langchain-google-genai
 langchain_ollama
-#chromadb
+chromadb
 google-search-results 
 numexpr 
 text-generation
@@ -47,3 +48,5 @@ streamlit
 duckduckgo-search
 unstructured
 ddgs
+embedchain
+openai-agents

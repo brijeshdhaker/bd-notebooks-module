@@ -11,8 +11,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 from com.example.agentic.loader.LoadManager import LoadManager
 
 #
-# model_name="sentence-transformers/all-mpnet-base-v2"
-# model_name="sentence-transformers/all-MiniLM-L6-v2"
+# model_name="sentence-transformers/all-mpnet-base-v2" // more accuracy
+# model_name="sentence-transformers/all-MiniLM-L6-v2"  // more fast
 # model_name="google/embeddinggemma-300m"
 #
 class EmbeddingManager:

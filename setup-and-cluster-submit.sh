@@ -18,6 +18,9 @@ pip install -U pip
 pip install -U -r requirements.txt
 deactivate
 
+#
+pip show litellm
+
 # Here we package up an isolated environment that we'll ship to YARN.
 # The awkward zip invocation for venv just creates nicer relative
 # paths.
