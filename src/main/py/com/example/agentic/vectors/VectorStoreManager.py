@@ -9,7 +9,7 @@ from typing import List, Dict, Any, Tuple
 from sklearn.metrics.pairwise import cosine_similarity
 from com.example.agentic.loader.LoadManager import LoadManager
 from com.example.agentic.embedding.EmbeddingManager import EmbeddingManager
-
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 class VectorStoreManager:
     """Manages document embeddings in a ChromaDB vector store"""
     
@@ -113,23 +113,19 @@ class VectorStoreManager:
 if __name__ == "__main__":
     #
     document_dir = "docs"
-    load_manager = LoadManager(document_dir)
-    douments = load_manager.from_directory()
+    #load_manager = LoadManager(document_dir)
+    douments = LoadManager.from_directory(document_dir)
     print(f"[*INFO] Total loaded documents: {len(douments)}")
     
-    from com.example.agentic.splitter.SplitManager import SplitManager
+    splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
+    chunks = splitter.split_documents(douments)
 
-    splitManager = SplitManager()
-    chunks = splitManager.split_documents(douments)
-    texts=[doc.page_content for doc in chunks]
-
-    ### Convert the text to embeddings
-    
+    #
     embedding_manager=EmbeddingManager()
-    embeddings = embedding_manager.generate_text_embeddings(texts)
-
+    embeddings = embedding_manager.embed_documents(chunks)
+    
+    #Convert the text to embeddings
     vectorstore = VectorStoreManager()
-
-    ##store int he vector dtaabase
-    #vectorstore.add_documents(chunks,embeddings)
+    vectorstore.add_documents(chunks,embeddings)
+        
     

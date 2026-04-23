@@ -21,18 +21,31 @@ class EmbeddingManager:
     def __init__(self, 
                  model_name: str = "all-MiniLM-L6-v2",
                  chunk_size: int = 1000, 
-                 chunk_overlap: int = 200):
+                 chunk_overlap: int = 200 ):
         """
         Initialize the embedding manager
         Args:
             model_name: HuggingFace model name for sentence embeddings
         """
         self.model_name = model_name
+        self.model = None
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
-        self.model = None
+        self.splitter = RecursiveCharacterTextSplitter(
+            chunk_size=self.chunk_size,
+            chunk_overlap=self.chunk_overlap,
+            length_function=len,
+            separators=["\n\n", "\n", " ", ""]
+        )
         self._load_model()
 
+    #
+    def chunk_documents(self, documents: List[Any]) -> List[Any]:
+        chunks = self.splitter.split_documents(documents)
+        print(f"[INFO] Split {len(documents)} documents into {len(chunks)} chunks.")
+        return chunks
+    
+    #
     def _load_model(self):
         """Load the SentenceTransformer model"""
         try:
@@ -77,14 +90,19 @@ class EmbeddingManager:
         print(f"[INFO] Generated Embeddings shape: {embeddings.shape}")
         return embeddings
 
-
+    def embed_chunks(self, chunks: List[Any]) -> np.ndarray:
+        texts = [chunk.page_content for chunk in chunks]
+        print(f"[INFO] Generating embeddings for {len(texts)} chunks...")
+        embeddings = self.model.encode(texts, show_progress_bar=True)
+        print(f"[INFO] Embeddings shape: {embeddings.shape}")
+        return embeddings
 
 # Example usage
 if __name__ == "__main__":
     #
     document_dir = "docs"
-    load_manager = LoadManager(document_dir)
-    douments = load_manager.from_directory()
+    #load_manager = LoadManager(document_dir)
+    douments = LoadManager.from_directory(document_dir)
     print(f"[*INFO] Total loaded documents: {len(douments)}")
     
     embedding_manager=EmbeddingManager()
@@ -92,4 +110,5 @@ if __name__ == "__main__":
     
     #chunks = emb_pipe.chunk_documents(docs)
     #embeddings = emb_pipe.embed_chunks(chunks)
-    print("[INFO] Example embedding:", embeddings[0] if len(embeddings) > 0 else None)
+    #print("[INFO] Example embedding:", embeddings[0] if len(embeddings) > 0 else None)
+

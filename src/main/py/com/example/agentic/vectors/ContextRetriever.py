@@ -86,7 +86,7 @@ if __name__ == "__main__":
     
     #
     ctx_retriever= ContextRetriever(vectorstore,embedding_manager)
-    documents = ctx_retriever.retrieve("Tell me about Dharmendra ?")
+    documents = ctx_retriever.retrieve("CSDA Program")
     for d in documents :
         print(d['content'])
 
