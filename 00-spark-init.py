@@ -13,20 +13,10 @@ from delta import *
 metastore_path = os.path.abspath('/apps/sandbox/metastore')
 metastore_url = f"jdbc:derby:;databaseName={metastore_path};create=true"
 
-#
-jdbcHostname = "mysqlserver.sandbox.net"
-jdbcDatabase = "METASTORE"
-jdbcPort = 3306
-db_user = os.getenv('MYSQL_ADMIN_USER')
-db_passwd = os.getenv('MYSQL_ADMIN_PASSWORD')
+# mysqluser = os.getenv('MYSQL_ADMIN_USER')
+# mysqlpass = os.getenv('MYSQL_ADMIN_PASSWORD')
+# metastore_url = f"jdbc:mysql://mysqlserver.sandbox.net:3306/METASTORE?user={mysqluser}&password={mysqlpass}&createDatabaseIfNotExist=true"
 
-jdbcUrl = "jdbc:mysql://{0}:{1}/{2}?user={3}&password={4}&createDatabaseIfNotExist=true".format(
-    jdbcHostname,
-    jdbcPort,
-    jdbcDatabase,
-    db_user,
-    db_passwd
-)
 #
 # com.mysql.cj.jdbc.Driver
 #
@@ -57,7 +47,7 @@ sparkConf = (
 )
 
 # configure the SparkSession with the configure_spark_with_delta_pip() utility function in Delta Lake:
-builder = SparkSession.builder.appName("pyspark-app").master("local[*]").config(conf=sparkConf)
+builder = SparkSession.builder.appName("jupyter-pyspark").master("local[*]").config(conf=sparkConf)
 spark = configure_spark_with_delta_pip(builder, extra_packages=["org.apache.hadoop:hadoop-aws:3.3.4"]).getOrCreate()
 
 #
