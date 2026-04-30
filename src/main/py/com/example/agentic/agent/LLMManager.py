@@ -1,6 +1,5 @@
 #
 import os
-import getpass
 from dotenv import load_dotenv
 from langchain.agents import create_agent
 from langchain.chat_models import init_chat_model
@@ -8,8 +7,6 @@ from dotenv import load_dotenv
 from crewai import LLM
 
 #
-# gemma4:latest
-# nomic-embed-text:latest
 #
 class LLMManager:
     """
@@ -36,7 +33,7 @@ class LLMManager:
         if type == 'ollama' :
             # LLM setup using litellm additional_params={"num_ctx":16384},
             return LLM(
-                model=f"ollama/{os.environ["OLLAMA_MODEL"]}", 
+                model=f"ollama/{os.environ["OPENAI_MODEL_NAME"]}", 
                 base_url="http://localhost:11434", 
                 temperature=0.3,     # Controls randomness in output (0.0 to 1.0)
                 max_tokens=4096,     # Maximum number of tokens to generate
