@@ -34,4 +34,9 @@ target
 .env
 credentials.json
 token.json
-vactor_store
+vectorstore
+storage
+knowledge
+memory
+logs
+outputs
