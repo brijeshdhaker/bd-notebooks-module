@@ -18,14 +18,9 @@ class ChromaVectorStore(VectorStore):
     """
     ChromaVectorStore
     """
-    def __init__(self, 
-                 collection_name: str = "sandbox_documents" ,
-                 persist_dir: str = "chroma",
-                 embedding_model: str = "all-MiniLM-L6-v2", 
-                 chunk_size: int = 1000, 
-                 chunk_overlap: int = 200):
+    def __init__(self, collection_name: str = "sandbox_documents" , persist_dir: str = "chromadb"):
         
-        super().__init__(persist_dir,embedding_model,chunk_size,chunk_overlap) 
+        super().__init__(persist_dir) 
         self.collection_name = collection_name
         self._initialize_store()
 
@@ -39,8 +34,8 @@ class ChromaVectorStore(VectorStore):
             #Chroma.from_documents(persist_directory=self.persist_directory)
             #OllamaEmbeddings(model="nomic-embed-text", url="http://localhost:11434/api/embed")
             #db = Chroma(persist_directory=self.persist_directory, embedding_function=OpenAIEmbeddings());
-            _settings = Settings(allow_reset=False, is_persistent=True, anonymized_telemetry=False, persist_directory=self.persist_directory)
-            self.client = chromadb.PersistentClient(path=self.persist_directory, settings=_settings)
+            _settings = Settings(allow_reset=False, is_persistent=True, anonymized_telemetry=False, persist_directory=str(self.persist_directory))
+            self.client = chromadb.PersistentClient(path=str(self.persist_directory), settings=_settings)
             #self.client = chromadb.HttpClient(host="localhost", port=8000, ssl=False)
 
             # Get or create collection

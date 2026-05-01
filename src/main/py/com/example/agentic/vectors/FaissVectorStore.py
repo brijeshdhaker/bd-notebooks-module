@@ -10,21 +10,38 @@ from com.example.agentic.loader.LoadManager import LoadManager
 from com.example.agentic.vectors.VectorStore import VectorStore
 import uuid
 
+#
 class FaissVectorStore(VectorStore):
     """
     FaissVectorStore : Facebook AI Similarity Search
     """
-    def __init__(self, 
-                 persist_dir: str = "faiss", 
-                 embedding_model: str = "all-MiniLM-L6-v2", 
-                 chunk_size: int = 1000, 
-                 chunk_overlap: int = 200):
+    def __init__(self, persist_dir: str = "faissdb"):
         #        
-        super().__init__(persist_dir,embedding_model,chunk_size,chunk_overlap) 
+        super().__init__(persist_dir)
         #
+        self.faiss_path = os.path.join(self.persist_directory, "faiss.index")
+        self.meta_path = os.path.join(self.persist_directory, "metadata.pkl")
         self.index = None
         self.metadata = []
-        
+        self._initialize_store()
+
+    #
+    def _initialize_store(self):
+        """Initialize FaissVector Store"""
+        try:
+            # Create persistent ChromaDB client
+            os.makedirs(self.persist_directory, exist_ok=True)
+            #
+            self.index = faiss.read_index(str(self.faiss_path))
+            #
+            with open(self.meta_path, "rb") as f:
+                self.metadata = pickle.load(f)
+            print(f"[INFO] Loaded Faiss index and metadata from {self.persist_directory}")
+
+        except Exception as e:
+            print(f"Error initializing vector store: {e}")
+            raise        
+    
     #
     def build_from_documents(self, documents: List[Any]):
         print(f"[INFO] Building vector store from {len(documents)} raw documents...")
@@ -34,7 +51,6 @@ class FaissVectorStore(VectorStore):
         # Prepare data for Faiss Vector Store
         ids = []
         metadatas = []
-        documents_text = []
         embeddings_list = []
         
         for i, (doc, embedding) in enumerate(zip(chunks, embeddings)):
@@ -45,20 +61,17 @@ class FaissVectorStore(VectorStore):
             # Prepare metadata
             metadata = dict(doc.metadata)
             metadata['doc_index'] = doc_id
-            metadata['doc_length'] = len(doc.page_content)
-            metadata['doc_content'] = doc.page_content
+            metadata['content_length'] = len(doc.page_content)
+            metadata['content'] = doc.page_content
             metadatas.append(metadata)
-            
-            # Document content
-            #documents_text.append(doc.page_content)
             
             # Embedding
             embeddings_list.append(embedding.tolist())
 
         # Add to Vector Store
         try:
-            self.add_embeddings(np.array(embeddings_list).astype('float32'), metadatas)
-            self.save()
+            self._add_embeddings(np.array(embeddings_list).astype('float32'), metadatas)
+            self._save()
         except Exception as e:
             print(f"Error adding documents to vector store: {e}")
             raise
@@ -66,7 +79,7 @@ class FaissVectorStore(VectorStore):
         print(f"Successfully added {len(documents)} documents to vector store")
 
     #
-    def add_embeddings(self, embeddings: np.ndarray, metadatas: List[Any] = None):
+    def _add_embeddings(self, embeddings: np.ndarray, metadatas: List[Any] = None):
         dim = embeddings.shape[1]
         if self.index is None:
             self.index = faiss.IndexFlatL2(dim)
@@ -75,22 +88,13 @@ class FaissVectorStore(VectorStore):
             self.metadata.extend(metadatas)
         print(f"[INFO] Added {embeddings.shape[0]} vectors to Faiss index.")
 
-    def save(self):
-        faiss_path = os.path.join(self.persist_directory, "faiss.index")
-        meta_path = os.path.join(self.persist_directory, "metadata.pkl")
-        faiss.write_index(self.index, faiss_path)
-        with open(meta_path, "wb") as f:
+    #
+    def _save(self):
+        faiss.write_index(self.index, str(self.faiss_path))
+        with open(self.meta_path, "wb") as f:
             pickle.dump(self.metadata, f)
         print(f"[INFO] Saved Faiss index and metadata to {self.persist_directory}")
 
-    def load(self):
-        faiss_path = os.path.join(self.persist_directory, "faiss.index")
-        meta_path = os.path.join(self.persist_directory, "metadata.pkl")
-        self.index = faiss.read_index(faiss_path)
-        with open(meta_path, "rb") as f:
-            self.metadata = pickle.load(f)
-        print(f"[INFO] Loaded Faiss index and metadata from {self.persist_directory}")
-    
     #
     def search(self, query_embedding: np.ndarray, top_k: int = 5):
         # D → distances, 
@@ -102,7 +106,8 @@ class FaissVectorStore(VectorStore):
             similarity_score = 1 - distance
             results.append({
                 "id": metadata['doc_index'],
-                "content": metadata['doc_content'], 
+                "content": metadata['content'],
+                "content_length": metadata['content_length'], 
                 "distance": distance,
                 "similarity_score": similarity_score, 
                 "metadata": metadata,
@@ -120,10 +125,9 @@ class FaissVectorStore(VectorStore):
 if __name__ == "__main__":
     
     #
-    document_dir = "docs"
-    #douments = LoadManager.from_directory(document_dir, inclusions=["txt"])
+    #douments = LoadManager.from_directory("docs/text", inclusions=["txt"])
     #print(f"[*INFO] Total loaded documents: {len(douments)}")
-    store = FaissVectorStore("faiss")
+    store = FaissVectorStore("faissdb")
     #store.build_from_documents(douments)
-    store.load()
+    #store.load()
     print(store.query("What are benefits of microservices ?", top_k=3))

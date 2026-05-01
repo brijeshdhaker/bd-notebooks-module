@@ -15,7 +15,7 @@ class VectorStoreManager:
     
     def __init__(self, 
                  collection_name: str = "sandbox_documents", 
-                 persist_directory: str = "chroma"):
+                 persist_directory: str = "chromadb"):
         """
         Initialize the vector store
         Args:
@@ -24,9 +24,9 @@ class VectorStoreManager:
         """
         ## Create a simple txt file
         work_dir = os.getenv("WORK_DIR")
-        os.makedirs(f"{work_dir}/vectorstore/chroma",exist_ok=True)
+        os.makedirs(f"{work_dir}/storage/chromadb",exist_ok=True)
         self.collection_name = collection_name
-        self.persist_directory = f"{work_dir}/vectorstore/{persist_directory}"
+        self.persist_directory = f"{work_dir}/storage/{persist_directory}"
         self.client = None
         self.collection = None
         self._initialize_store()

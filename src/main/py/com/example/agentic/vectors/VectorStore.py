@@ -7,12 +7,12 @@ from com.example.agentic.embedding.EmbeddingManager import EmbeddingManager
 class VectorStore(ABC):
     
     def __init__(self, 
-                 persist_dir: str = "chroma",
-                 embedding_model: str = "all-MiniLM-L6-v2", 
+                 persist_dir: str = "chromadb",
+                 embedding_model: str = "all-mpnet-base-v2", #all-MiniLM-L6-v2
                  chunk_size: int = 1000, 
                  chunk_overlap: int = 200):
         
-        self.persist_directory = Path(f"vectorstore/{persist_dir}").resolve()
+        self.persist_directory = Path(f"storage/{persist_dir}").resolve()
         self.metadata = []
         self.embedding_model = embedding_model
         self.model = SentenceTransformer(embedding_model)

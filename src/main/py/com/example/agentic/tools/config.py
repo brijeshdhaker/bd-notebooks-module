@@ -41,7 +41,7 @@ _tool_config = dict(
         provider="chromadb",
         config={
             #"collection_name": "sandbox_documents",
-            #"persist_directory":"/home/brijeshdhaker/IdeaProjects/crewai_design_document/vectorstore/chroma", 
+            #"persist_directory":"/home/brijeshdhaker/IdeaProjects/crewai_design_document/storage/chromadb", 
             #"allow_reset": "true", 
             #"is_persistent": "true"
         }
@@ -93,7 +93,7 @@ _rag_tool_config = dict(
         provider="chromadb",
         config={
             #"collection_name": "sandbox_documents",
-            #"persist_directory":"/home/brijeshdhaker/IdeaProjects/crewai_design_document/vectorstore/chroma", 
+            #"persist_directory":"/home/brijeshdhaker/IdeaProjects/crewai_design_document/storage/chromadb", 
             #"allow_reset": "true", 
             #"is_persistent": "true"
         }
