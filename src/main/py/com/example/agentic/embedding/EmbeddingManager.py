@@ -52,7 +52,7 @@ class EmbeddingManager:
             print(f"Loading embedding model: {self.model_name}")
             self.model = SentenceTransformer(self.model_name)
             print(f"Model {self.model_name} loaded successfully.")
-            print(f"Embedding dimension: {self.model.get_sentence_embedding_dimension()}")
+            print(f"Embedding dimension: {self.model.get_embedding_dimension()}")
         except Exception as e:
             print(f"Error loading model {self.model_name}: {e}")
             raise
@@ -69,7 +69,7 @@ class EmbeddingManager:
             raise ValueError("Model not loaded")
         
         print(f"Generating embeddings for {len(texts)} texts...")
-        embeddings = self.model.encode(texts, show_progress_bar=True)
+        embeddings = self.model.encode(texts, show_progress_bar=False)
         print(f"Generated embeddings with shape: {embeddings.shape}")
         return embeddings
     

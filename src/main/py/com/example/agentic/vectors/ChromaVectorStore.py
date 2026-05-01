@@ -103,7 +103,7 @@ class ChromaVectorStore(VectorStore):
 
     def query(self, query_text: str, top_k: int = 5):
         print(f"[INFO] Querying vector store for: '{query_text}'")
-        query_embedding = self.embeddingManager.embed_query([query_text])[0]
+        #query_embedding = self.embeddingManager.embed_query([query_text])[0]
         #query_embedding = self.model.encode([query_text]).astype('float32')
         return self.search(query_text, top_k=top_k)
 
@@ -169,9 +169,8 @@ class ChromaVectorStore(VectorStore):
 if __name__ == "__main__":
     
     #
-    # document_dir = "docs"
-    # douments = LoadManager.from_directory(document_dir)
-    # print(f"[*INFO] Total loaded documents: {len(douments)}")
+    #douments = LoadManager.from_directory("docs/text", inclusions=["txt"])
+    #print(f"[*INFO] Total loaded documents: {len(douments)}")
     
     # Connect to knowledge store vectorstore.
     store = ChromaVectorStore()

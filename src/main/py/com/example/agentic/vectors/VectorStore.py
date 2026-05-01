@@ -1,3 +1,4 @@
+import os
 from abc import ABC, abstractmethod
 from typing import List, Any
 from pathlib import Path
@@ -12,7 +13,7 @@ class VectorStore(ABC):
                  chunk_size: int = 1000, 
                  chunk_overlap: int = 200):
         
-        self.persist_directory = Path(f"storage/{persist_dir}").resolve()
+        self.persist_directory = Path(f"{os.environ["WORK_DIR"]}/storage/{persist_dir}").resolve()
         self.metadata = []
         self.embedding_model = embedding_model
         self.model = SentenceTransformer(embedding_model)
