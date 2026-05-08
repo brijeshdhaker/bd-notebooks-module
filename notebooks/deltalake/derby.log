@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-Thu Apr 02 09:30:16 IST 2026:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-019d-4c59-5707-000001719b28 
+Sun Apr 05 18:11:56 IST 2026:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-019d-5daa-0246-000002ad1a00 
 on database directory /apps/sandbox/metastore with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5ffd2b27 
-Loaded from file:/opt/spark-3.5.3/jars/derby-10.14.2.0.jar
+Loaded from file:/opt/conda/lib/python3.11/site-packages/pyspark/jars/derby-10.14.2.0.jar
 java.vendor=Ubuntu
 java.runtime.version=17.0.18+8-Ubuntu-124.04.1
 user.dir=/home/brijeshdhaker/IdeaProjects/bd-notebooks-module/notebooks/deltalake

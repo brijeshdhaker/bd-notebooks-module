@@ -1,3 +1,4 @@
+__pycache__
 .DS_Store
 *.gz
 *.tgz
@@ -21,6 +22,7 @@
 *.der
 *-creds
 *.extfile
+*.log
 */dependency-reduced-pom.xml
 build
 target
@@ -30,3 +32,10 @@ target
 *.pyc
 .ipynb_checkpoints
 .env
+credentials.json
+token.json
+storage
+knowledge
+memory
+logs
+outputs

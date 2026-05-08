@@ -1,0 +1,30 @@
+{
+	"inputs": [],
+	"servers": {
+		"microsoft/playwright-mcp": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"@playwright/mcp@latest"
+			],
+			"gallery": "https://api.mcp.github.com",
+			"version": "0.0.1-seed"
+		},
+		"docs-langchain": {
+			"url": "https://docs.langchain.com/mcp"
+		},
+
+		"email-mcp-server": {
+			"type": "stdio",
+            "command": "python",
+            "args": [
+                "/home/brijeshdhaker/IdeaProjects/bd-notebooks-module/src/main/py/com/example/rag/mcp/emailserver.py"
+            ],
+			"env": {
+				"WORK_DIR":"/home/brijeshdhaker/IdeaProjects/bd-notebooks-module",
+				"PYTHONPATH":"/home/brijeshdhaker/IdeaProjects/bd-notebooks-module/src/main/py"
+            },
+			"version": "0.0.1-snapshot"
+		}
+	}
+}

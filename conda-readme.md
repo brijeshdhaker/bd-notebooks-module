@@ -115,7 +115,7 @@ conda list --explicit > bd-pyspark-module/env_python3_11_13_spec_file.txt
 #### Export Cond Env Configuration
 ```bash
 conda env export > bd-pyspark-module/env_python3_11_13_packages.yaml
-conda export --name env_python3_11_13 --format=environment-yaml --file=./bd-pyspark-module/env_python3_11_13_packages.yaml
+conda export --name env_python3_11_13 --format=environment-yaml --file=./env_python3_11_13_packages.yaml
 
 conda export --file=environment.yaml    # Auto-detects YAML format
 conda export --file=environment.json    # Auto-detects JSON format
@@ -131,3 +131,5 @@ conda install anaconda-clean
 
 #### Remove all Anaconda-related files and directories with a confirmation prompt before deleting each one:
 anaconda-clean --yes
+
+conda uninstall -n base --all

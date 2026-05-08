@@ -44,6 +44,13 @@ services:
       - seccomp:unconfined
 
 #
+models:
+  llama:
+    model: ai/llama3.2:1B-Q8_0
+    context_size: 2048
+  embedding-model:
+    model: ai/all-minilm-l6-v2-vllm
+#
 # Docker Volumes
 #
 volumes:
