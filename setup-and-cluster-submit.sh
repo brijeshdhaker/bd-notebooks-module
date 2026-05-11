@@ -1,6 +1,11 @@
 set -e
 set -x
 
+# Install Python
+sudo apt install python3
+sudo apt install python3-pip
+sudo apt install python3-venv
+
 # Set $PYTHON to the Python executable you want to create
 # your virtual environment with. It could just be something
 # like `python3`, if that's already on your $PATH, or it could
