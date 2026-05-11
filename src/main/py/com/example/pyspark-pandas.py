@@ -1,11 +1,12 @@
 import pandas as pd
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import pandas_udf
+from pyspark.sql.types import StructType, StructField, StringType, LongType
+from pyspark.sql.pandas.functions import pandas_udf
 
 
 def main(spark):
 
-    @pandas_udf("col1 string, col2 long")
+    @pandas_udf(StructType([StructField("col1", StringType()), StructField("col2", LongType())]))
     def func(s1: pd.Series, s2: pd.Series, s3: pd.DataFrame) -> pd.DataFrame:
         s3['col2'] = s1 + s2.str.len()
         return s3
