@@ -10,9 +10,6 @@
 #
 
 #
-version: '3.8'
-
-#
 include:
   - path: ./docker-minio.yml
   - path: ./docker-mysqlserver.yml
