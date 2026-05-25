@@ -24,19 +24,6 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: cars; Type: TABLE; Schema: public; Owner: pgadmin
---
-
-CREATE TABLE public.cars (
-    brand character varying(255),
-    model character varying(255),
-    year integer
-);
-
-
-ALTER TABLE public.cars OWNER TO pgadmin;
-
---
 -- Name: categories; Type: TABLE; Schema: public; Owner: pgadmin
 --
 
@@ -293,15 +280,6 @@ ALTER TABLE ONLY public.products ALTER COLUMN product_id SET DEFAULT nextval('pu
 --
 
 ALTER TABLE ONLY public.testproducts ALTER COLUMN testproduct_id SET DEFAULT nextval('public.testproducts_testproduct_id_seq'::regclass);
-
-
---
--- Data for Name: cars; Type: TABLE DATA; Schema: public; Owner: pgadmin
---
-
-COPY public.cars (brand, model, year) FROM stdin;
-\.
-
 
 --
 -- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: pgadmin
