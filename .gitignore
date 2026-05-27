@@ -29,7 +29,7 @@ __pycache__
 */dependency-reduced-pom.xml
 build
 target
-dist
+dist/*
 !/.gitignore
 !/.vscode
 !/.idea
@@ -41,5 +41,5 @@ token.json
 storage
 knowledge
 memory
-logs
-outputs
+logs/*
+outputs/*
