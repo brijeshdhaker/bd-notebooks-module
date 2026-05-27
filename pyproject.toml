@@ -73,12 +73,16 @@ dependencies = [
     "streamlit>=1.57.0",
     "tavily-python>=0.7.24",
     "torchvision>=0.27.0",
+    "pytz>=2026.2",
+    "faker>=40.19.1",
+    "kafka-python>=2.3.1",
+    "kafka-python-ng>=2.2.3",
 ]
 
-#[project.optional-dependencies]
-#dev = [
-#    "pytest"
-#]
+[project.optional-dependencies]
+dev = [
+    "pytest"
+]
 
 [project.scripts]
 bd_crewai_module = "com.example.ai.apps.crewai.main:run"
