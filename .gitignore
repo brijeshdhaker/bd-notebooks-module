@@ -29,6 +29,7 @@ __pycache__
 */dependency-reduced-pom.xml
 build
 target
+dist
 !/.gitignore
 !/.vscode
 !/.idea
