@@ -6,7 +6,7 @@ class TimeUtils:
         pass
 
     def unix_time_millis(self, dt):
-        epoch = datetime.utcfromtimestamp(0)
+        epoch = datetime.fromtimestamp(0)
         return (dt - epoch).total_seconds() * 1000.0
 
     def getTime(self): 

@@ -9,6 +9,8 @@ __pycache__
 *.keytab
 .classpath
 .project
+.chainlit
+.files
 *.pub
 *_key
 *_rsa

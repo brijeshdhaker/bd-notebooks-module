@@ -21,8 +21,6 @@ dependencies = [
     "delta-spark==3.3.2",
     "duckdb-engine>=0.17.0",
     "flask>=3.1.3",
-    "google-api-python-client>=2.196.0",
-    "google-auth-oauthlib>=1.4.0",
     "grpcio>=1.80.0",
     "ipykernel>=7.2.0",
     "ipython-sql>=0.5.0",
@@ -31,17 +29,76 @@ dependencies = [
     "matplotlib>=3.10.9",
     "mysql-connector-python>=9.7.0",
     "pandas>=3.0.2",
-    "psycopg2-binary>=2.9.12",
     "pyarrow>=24.0.0",
     "pymysql>=1.1.3",
     "pyspark==3.5.3",
     "python-dotenv",
     "seaborn>=0.13.2",
-    "setuptools>=82.0.1",
+    "setuptools",
     "sqlite3-to-mysql>=2.6.0",
     "toml>=0.10.2",
+    "chainlit>=2.11.1",
+    "chromadb>=1.1.1",
+    "crewai-tools[mcp]>=1.14.3",
+    "crewai[file-processing,litellm,tools]==1.14.3",
+    "docx2txt>=0.9",
+    "faiss-cpu>=1.13.2",
+    "fastapi[standard]>=0.136.1",
+    "google-api-python-client>=2.196.0",
+    "google-auth-httplib2>=0.4.0",
+    "google-auth-oauthlib>=1.4.0",
+    "jq>=1.11.0",
+    "langchain>=1.2.17",
+    "langchain-chroma>=1.0.0",
+    "langchain-community>=0.4.1",
+    "langchain-groq>=1.1.2",
+    "langchain-huggingface>=1.2.2",
+    "langchain-mcp-adapters>=0.2.2",
+    "langchain-ollama>=1.1.0",
+    "langchain-openai>=1.2.1",
+    "langchain-tavily>=0.2.18",
+    "langchainhub>=0.1.21",
+    "langgraph>=1.1.10",
+    "langgraph-checkpoint-postgres>=3.1.0",
+    "langsmith>=0.8.3",
+    "openai-agents>=0.4.2",
+    "pdfplumber>=0.11.9",
+    "psycopg[binary]>=3.3.4",
+    "pydantic[email]>=2.11.10",
+    "pygithub>=2.9.1",
+    "pymupdf>=1.26.7",
+    "pypdf>=6.10.2",
+    "sentence-transformers>=5.4.1",
+    "sqlalchemy>=2.0.49",
+    "streamlit>=1.57.0",
+    "tavily-python>=0.7.24",
+    "torchvision>=0.27.0",
 ]
 
+#[project.optional-dependencies]
+#dev = [
+#    "pytest"
+#]
+
+[project.scripts]
+bd_crewai_module = "com.example.ai.apps.crewai.main:run"
+bd_crewai_run = "com.example.ai.apps.crewai.main:run"
+bd_crewai_train = "com.example.ai.apps.crewai.main:train"
+bd_crewai_replay = "com.example.ai.apps.crewai.main:replay"
+bd_crewai_test = "com.example.ai.apps.crewai.main:test"
+bd_crewai_run_with_trigger = "com.example.ai.apps.crewai.main:run_with_trigger"
+#
+mysql_chat_start_app = "com.example.ai.apps.mysql_chat.app_runner:start_app"
+mysql_chat_start_services = "com.example.ai.apps.mysql_chat.app_runner:start_services"
+#
+rag_search_faiss_crew = "com.example.ai.apps.rag_crew.main:runFAISSRagCrew"
+rag_search_tool_crew = "com.example.ai.apps.rag_crew.main:runToolRagCrew"
+rag_search_knowledge_crew = "com.example.ai.apps.rag_crew.main:runPDFKnowledgeCrew"
+rag_search_app = "com.example.ai.apps.rag_crew.RAGSearch:main"
+#
+run_design_crew = "com.example.ai.apps.design_crew.main:trigger"
+
+#
 [project.urls]
 Homepage = "https://example.com"
 Documentation = "https://readthedocs.org"
@@ -49,12 +106,22 @@ Repository = "https://github.com/me/spam.git"
 Issues = "https://github.com/me/spam/issues"
 Changelog = "https://github.com/me/spam/blob/master/CHANGELOG.md"
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/main/py"]
-
+#
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = "-ra -q"
 testpaths = [
     "src/test/py"
 ]
+
+#
+[tool.hatch.build.targets.wheel]
+packages = ["src/main/py"]
+
+#
+[tool.crewai]
+type = "crew"
+
+# Point to your requirements file
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}

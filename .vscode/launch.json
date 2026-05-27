@@ -5,6 +5,39 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Python Debugger: Streamlit",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "streamlit",
+      "console": "integratedTerminal",
+      "args": ["run", "${file}", "--server.port", "8500"],
+      "jinja": true,
+      "envFile": "${workspaceFolder}/.env",
+      "justMyCode": false
+    },
+    {
+      "name": "Python Debugger: Chainlit",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "chainlit",
+      "console": "integratedTerminal",
+      "args": ["run", "${file}", "--port", "9500", "-w"],
+      "jinja": true,
+      "envFile": "${workspaceFolder}/.env",
+      "justMyCode": false
+    },
+    {
+      "name": "Python Debugger: FastAPI",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "uvicorn",
+      "console": "integratedTerminal",
+      "args": ["com.example.ai.apps.mysql_chat.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000" ],
+      "jinja": true,
+      "envFile": "${workspaceFolder}/.env",
+      "justMyCode": false
+    },
+    {
       "name": "Python Debugger: Flask",
       "type": "debugpy",
       "request": "launch",
