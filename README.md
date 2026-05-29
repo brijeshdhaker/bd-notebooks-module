@@ -257,3 +257,169 @@ uv pip install dist/bd_crewai_module-0.1.0-py3-none-any.whl
 pip install dist/bd_crewai_module-0.1.0-py3-none-any.whl
 python -m pip install dist/bd_crewai_module-0.1.0-py3-none-any.whl
 ```
+
+#### Databricks Access Token Generation
+```
+# Account Token
+curl --request POST \
+--url $DATABRICKS_ACCOUNT_TOKEN_URL \
+--user "$DATABRICKS_CLIENT_ID:$DATABRICKS_CLIENT_SECRET" \
+--data 'grant_type=client_credentials&scope=all-apis'
+  
+# Workspace Token
+curl --request POST \
+--url $DATABRICKS_WORKSPACE_TOKEN_URL \
+--user "$DATABRICKS_CLIENT_ID:$DATABRICKS_CLIENT_SECRET" \
+--data 'grant_type=client_credentials&scope=all-apis'
+
+databricks auth describe
+
+```
+
+
+User: show tables in databricks uc 
+
+GitHub Copilot: I'll help you show tables in Databricks Unity Catalog. Let me start by discovering what's available. 
+
+Ran `execute_sql_read_only` 
+Completed with input: {
+  "query": "SHOW CATALOGS"
+}
+
+Ran `poll_sql_result` 
+Completed with input: {
+  "statement_id": "01f159e0-5ccf-17f3-a3ff-94481738006f"
+}
+
+Found **4 catalogs**:
+- `dbx_catalog`
+- `samples`
+- `system`
+- `workspace`
+
+Now let me show tables. I'll query the main catalogs:   
+
+Ran `execute_sql_read_only` 
+Completed with input: {
+  "query": "SHOW SCHEMAS IN dbx_catalog"
+}
+
+Ran `execute_sql_read_only` 
+Completed with input: {
+  "query": "SHOW SCHEMAS IN samples"
+}
+
+Ran `execute_sql_read_only` 
+Completed with input: {
+  "query": "SHOW SCHEMAS IN workspace"
+}
+
+**Schemas found:**
+
+**dbx_catalog:**
+- default, information_schema
+
+**samples:**
+- accuweather, bakehouse, healthverity, nyctaxi, sec, tpcds_sf1, tpcds_sf1000, tpch, wanderbricks
+
+**workspace:**
+- default, information_schema
+
+Let me get the tables from a few schemas:   
+
+Ran `execute_sql_read_only` 
+Completed with input: {
+  "query": "SHOW TABLES IN samples.nyctaxi"
+}
+
+Ran `execute_sql_read_only` 
+Completed with input: {
+  "query": "SHOW TABLES IN samples.tpch"
+}
+
+Ran `execute_sql_read_only` 
+Completed with input: {
+  "query": "SHOW TABLES IN dbx_catalog.default"
+}
+
+**Tables found:**
+
+**samples.nyctaxi:**
+- `trips`
+
+**samples.tpch:**
+- customer, lineitem, nation, orders, part, partsupp, region, supplier
+
+**dbx_catalog.default:**
+- (empty)
+
+Let me check a couple more popular schemas:     
+
+Ran `execute_sql_read_only` 
+Completed with input: {
+  "query": "SHOW TABLES IN samples.accuweather"
+}
+
+Ran `execute_sql_read_only` 
+Completed with input: {
+  "query": "SHOW TABLES IN samples.tpcds_sf1"
+}
+
+## Databricks Unity Catalog - Tables Overview
+
+**samples.accuweather** (12 tables):
+- forecast_daily_calendar_imperial, forecast_daily_calendar_metric
+- forecast_daynight_imperial, forecast_daynight_metric
+- forecast_hourly_imperial, forecast_hourly_metric
+- historical_daily_calendar_imperial, historical_daily_calendar_metric
+- historical_daynight_imperial, historical_daynight_metric
+- historical_hourly_imperial, historical_hourly_metric
+
+**samples.tpcds_sf1** (24 tables):
+- call_center, catalog_page, catalog_returns, catalog_sales
+- customer, customer_address, customer_demographics
+- date_dim, household_demographics, income_band
+- inventory, item, promotion, reason, ship_mode
+- store, store_returns, store_sales
+- time_dim, warehouse, web_page, web_returns, web_sales, web_site
+
+To list tables from any other schema, use:
+```sql
+SHOW TABLES IN catalog_name.schema_name
+```
+
+Or describe a specific table:
+```sql
+DESCRIBE TABLE catalog_name.schema_name.table_name
+```
+
+User: DESCRIBE TABLE samples.nyctaxi.trips
+
+GitHub Copilot: Ran `execute_sql_read_only` 
+Completed with input: {
+  "query": "DESCRIBE TABLE samples.nyctaxi.trips"
+}
+
+**samples.nyctaxi.trips** - Table Schema
+
+| Column | Data Type | Comment |
+|--------|-----------|---------|
+| tpep_pickup_datetime | timestamp | |
+| tpep_dropoff_datetime | timestamp | |
+| trip_distance | double | |
+| fare_amount | double | |
+| pickup_zip | int | |
+| dropoff_zip | int | |
+
+This NYC taxi trips table contains 6 columns tracking pickup/dropoff times, distance, fare amount, and zip codes.
+
+User: show schemas in catalog 'dbx_catalog'
+
+GitHub Copilot: Ran `execute_sql_read_only` 
+Completed with input: {
+  "query": "SHOW SCHEMAS IN dbx_catalog"
+}
+
+**Schemas in dbx_catalog:**
+- `default`
+- `information_schema`

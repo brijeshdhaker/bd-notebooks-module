@@ -1,0 +1,54 @@
+#
+# docker compose -f docker-unitycatalog.yml up -d ucserver
+# docker compose -f docker-unitycatalog.yml down ucserver
+#
+# docker compose -f docker-unitycatalog.yml up -d ucclient
+# docker compose -f docker-unitycatalog.yml down ucclient
+#
+name: unitycatalog
+
+services:
+
+  ucserver:
+    image: unitycatalog/unitycatalog:v0.3.0
+    container_name: ucserver
+    hostname: ucserver.sandbox.net
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - type: bind
+        source: ./conf/unitycatalog
+        target: /opt/unitycatalog/etc/conf
+      - type: bind
+        source: /apps/sandbox/unitycatalog
+        target: /opt/unitycatalog/etc/data
+  
+  #
+  ucclient:
+    image: unitycatalog/unitycatalog-ui:main
+    container_name: ucclient
+    hostname: ucclient.sandbox.net
+    restart: always
+    build:
+      context: ui/
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - ucserver
+    environment:
+      - PROXY_HOST=ucserver.sandbox.net  
+
+#
+volumes:
+  # Persist docker volume across container restarts
+  sandbox_apps_path:
+    external: true
+
+#
+networks:
+  default:
+    external: true
+    driver: bridge
+    name: sandbox.net
