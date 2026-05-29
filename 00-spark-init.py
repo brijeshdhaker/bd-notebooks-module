@@ -26,7 +26,7 @@ metastore_url = f"jdbc:derby:;databaseName={metastore_path};create=true"
 sparkConf = (
     SparkConf()
     .set("spark.jars.ivy","/home/brijeshdhaker/.ivy2")
-    .set("spark.jars.packages","org.apache.hadoop:hadoop-aws:3.3.4,com.amazonaws:aws-java-sdk-bundle:1.12.797,io.delta:delta-spark_2.12:3.3.2,io.unitycatalog:unitycatalog-spark_2.12:0.3.0")
+    .set("spark.jars.packages","org.apache.hadoop:hadoop-aws:3.3.4,com.amazonaws:aws-java-sdk-bundle:1.12.797,io.delta:delta-spark_2.12:3.3.2,io.unitycatalog:unitycatalog-spark_2.12:0.2.1")
     .set("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
     .set("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
     .set("spark.sql.catalogImplementation", "hive")
@@ -46,17 +46,18 @@ sparkConf = (
     # 
     #.set("spark.eventLog.enabled", "true")
     #.set("spark.eventLog.dir", "file:///apps/var/logs/spark-events")
+    #
     # Unity Catalog Configuration
-    .set("spark.sql.catalog.unitycatalog", "io.unitycatalog.spark.UCSingleCatalog")
-    .set("spark.sql.catalog.unitycatalog.uri", "http://ucserver.sandbox.net:8080")
-    .set("spark.sql.catalog.unitycatalog.token", "")
-    .set("spark.sql.defaultCatalog", "unitycatalog")
+    #.set("spark.sql.catalog.unitycatalog", "io.unitycatalog.spark.UCSingleCatalog")
+    #.set("spark.sql.catalog.unitycatalog.uri", "http://ucserver.sandbox.net:8080")
+    #.set("spark.sql.catalog.unitycatalog.token", "")
+    #.set("spark.sql.defaultCatalog", "unitycatalog")
 
 )
 
 # configure the SparkSession with the configure_spark_with_delta_pip() utility function in Delta Lake:
 builder = SparkSession.builder.appName("jupyter-pyspark").master("local[*]").config(conf=sparkConf)
-spark = configure_spark_with_delta_pip(builder, extra_packages=["org.apache.hadoop:hadoop-aws:3.3.4"]).getOrCreate()
+spark = configure_spark_with_delta_pip(builder, extra_packages=["org.apache.hadoop:hadoop-aws:3.3.4,io.unitycatalog:unitycatalog-spark_2.12:0.2.1"]).getOrCreate()
 
 #
 sc = spark.sparkContext
