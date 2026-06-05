@@ -13,7 +13,7 @@ authors = [{ name = "Brijesh K Dhaker", email = "brijeshdhaker@gmail.com" }]
 maintainers = [
   { name = "Brijesh K Dhaker", email = "brijeshdhaker@gmail.com" }
 ]
-requires-python = ">=3.11,<3.14"
+requires-python = ">=3.12,<3.14"
 readme = "README.md"
 license = "GPL-3.0"
 dependencies = [
@@ -28,7 +28,6 @@ dependencies = [
     "jupysql>=0.11.1",
     "matplotlib>=3.10.9",
     "mysql-connector-python>=9.7.0",
-    "pandas>=3.0.2",
     "pyarrow>=24.0.0",
     "pymysql>=1.1.3",
     "pyspark==3.5.3",
@@ -39,8 +38,7 @@ dependencies = [
     "toml>=0.10.2",
     "chainlit>=2.11.1",
     "chromadb>=1.1.1",
-    "crewai-tools[mcp]>=1.14.3",
-    "crewai[file-processing,litellm,tools]==1.14.3",
+    "crewai[tools]>=1.14.6",
     "docx2txt>=0.9",
     "faiss-cpu>=1.13.2",
     "fastapi[standard]>=0.136.1",
@@ -67,8 +65,8 @@ dependencies = [
     "pydantic[email]>=2.11.10",
     "pygithub>=2.9.1",
     "pymupdf>=1.26.7",
-    "pypdf>=6.10.2",
-    "sentence-transformers>=5.4.1",
+    "pypdf>=6.12.2",
+    "sentence-transformers>=5.5.1",
     "sqlalchemy>=2.0.49",
     "streamlit>=1.57.0",
     "tavily-python>=0.7.24",
@@ -77,9 +75,17 @@ dependencies = [
     "faker>=40.19.1",
     "kafka-python>=2.3.1",
     "kafka-python-ng>=2.2.3",
-    "databricks-langchain>=0.2.0",
+    "databricks-langchain>=0.19.0",
     "databricks-agents>=1.10.2",
     "databricks-mcp>=0.1.0",
+    "databricks-connect>=18.0.0",
+    "databricks-dlt>=0.3.0",
+    "databricks-sdk[notebook]>=0.112.0",
+    "databricks-sql-connector>=4.2.6",
+    "databricks-sqlalchemy>=2.0.9",
+    "databricks-cli>=0.18.0",
+    "fastmcp>=3.4.0",
+    "crewai-tools[mcp]>=1.14.6",
 ]
 
 [project.optional-dependencies]
