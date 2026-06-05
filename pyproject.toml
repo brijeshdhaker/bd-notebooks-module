@@ -16,7 +16,17 @@ maintainers = [
 requires-python = ">=3.12,<3.14"
 readme = "README.md"
 license = "GPL-3.0"
+
 dependencies = [
+    # Any dependencies for jobs and pipelines in this project can be added here
+    # See also https://docs.databricks.com/dev-tools/bundles/library-dependencies
+    #
+    # LIMITATION: for pipelines, dependencies are cached during development;
+    # add dependencies to the 'environment' section of your pipeline.yml file instead
+]
+
+[dependency-groups]
+dev = [
     "confluent-kafka[avro]>=2.14.0",
     "delta-spark==3.3.2",
     "duckdb-engine>=0.17.0",
@@ -119,21 +129,31 @@ Repository = "https://github.com/me/spam.git"
 Issues = "https://github.com/me/spam/issues"
 Changelog = "https://github.com/me/spam/blob/master/CHANGELOG.md"
 
+
 #
+[tool.hatch.build.targets.wheel]
+packages = ["src/main/py"]
+
+
+# Define one or more test directories
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = "-ra -q"
 testpaths = [
     "src/test/py"
 ]
-
-#
-[tool.hatch.build.targets.wheel]
-packages = ["src/main/py"]
+pythonpath = [
+    "src", 
+    "lib", 
+    "resources"
+]
 
 #
 [tool.crewai]
 type = "crew"
+
+[tool.ruff]
+line-length = 120
 
 # Point to your requirements file
 [tool.setuptools.dynamic]
