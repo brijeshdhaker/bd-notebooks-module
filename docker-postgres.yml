@@ -33,7 +33,7 @@ services:
     volumes:
       - sandbox_apps_path:/apps
       - /apps/sandbox/postgres/data:/var/lib/postgresql/data
-      - ./conf/postgres/my-postgres.conf:/etc/postgresql/postgresql.conf
+      - ./conf/postgres/postgres.conf:/etc/postgresql/postgresql.conf
       #- ./conf/postgres/init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
       - type: tmpfs
         target: /dev/shm

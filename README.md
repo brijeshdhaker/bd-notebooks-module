@@ -25,6 +25,10 @@ $ docker run -it --rm jupyter/all-spark-notebook:latest pyspark --version
 ```
 
 ```bash
+
+git config --global user.name "Brijesh Dhaker"
+git config --global user.email "brijeshdhaker@gmail.com"
+
 git reset --soft HEAD~2 # Changes stay in staging
 git reset HEAD~2        # Changes become unstaged
 
